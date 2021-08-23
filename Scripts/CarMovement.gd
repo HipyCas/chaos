@@ -5,13 +5,10 @@ const friction = .85
 
 const defaultFov = 80
 
-var cameraDefault = Vector3()
+onready var cameraDefault = $Camera.rotation_degrees
 
 var velocity = Vector3.ZERO
 var input_vector = Vector3()
-
-func _ready():
-	cameraDefault = $Camera.rotation_degrees
 
 func _process(delta):
 	$Camera.rotation_degrees.y = cameraDefault.y - velocity.x / 2

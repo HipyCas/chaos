@@ -9,9 +9,10 @@
 
 [sub_resource type="BoxShape" id=2]
 
-[sub_resource type="CapsuleShape" id=4]
+[sub_resource type="BoxShape" id=5]
+extents = Vector3( 0.75, 0.6, 2.25 )
 
-[sub_resource type="QuadMesh" id=5]
+[sub_resource type="QuadMesh" id=4]
 
 [node name="Spatial" type="Spatial"]
 
@@ -82,16 +83,17 @@ script = ExtResource( 1 )
 transform = Transform( 1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0.000400424, 3.0026, 7.00213 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Car"]
-shape = SubResource( 4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, 0 )
+shape = SubResource( 5 )
 
 [node name="Carv1" parent="Car" instance=ExtResource( 4 )]
-transform = Transform( -1, 0, -8.74228e-08, -2.29761e-09, 0.999655, 0.0262816, 8.73926e-08, 0.0262816, -0.999655, 0.0905474, -0.285059, 0.18058 )
+transform = Transform( -1, 0, -8.74228e-08, -2.29761e-09, 0.999655, 0.0262816, 8.73926e-08, 0.0262816, -0.999655, 0, 0, 0.083 )
 
 [node name="Spatial" type="Spatial" parent="."]
 
 [node name="MeshInstance" type="MeshInstance" parent="Spatial"]
 transform = Transform( 10, 0, 0, 0, -1.62921e-05, 1, 0, -100, -1.62921e-07, -0.060955, -1.00026, -40.0607 )
-mesh = SubResource( 5 )
+mesh = SubResource( 4 )
 material/0 = null
 
 [node name="Borders" type="Spatial" parent="."]

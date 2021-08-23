@@ -1,4 +1,4 @@
-extends StaticBody
+extends Spatial
 
 onready var car = get_node("../Car")
 
