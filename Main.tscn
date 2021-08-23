@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/CarMovement.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/FollowCar.gd" type="Script" id=2]
 [ext_resource path="res://default_env.tres" type="Environment" id=3]
 [ext_resource path="res://Assets/Carv1.glb" type="PackedScene" id=4]
+[ext_resource path="res://Road.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CubeMesh" id=1]
 
@@ -23,6 +24,8 @@ transform = Transform( -0.523451, -0.298452, 0.798076, 0, 0.936648, 0.350273, -0
 
 [node name="StaticBody3" type="StaticBody" parent="Environment"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1.59779, 3.04054, 0, -8.37261 )
+collision_layer = 2
+collision_mask = 0
 
 [node name="MeshInstance" type="MeshInstance" parent="Environment/StaticBody3"]
 transform = Transform( 1.02865, 0, 0, 0, 1.02865, 0, 0, 0, 1.02865, 0, 0, 0 )
@@ -34,6 +37,8 @@ shape = SubResource( 2 )
 
 [node name="StaticBody4" type="StaticBody" parent="Environment"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1.59779, 3.04054, 0, -24.389 )
+collision_layer = 2
+collision_mask = 0
 
 [node name="MeshInstance" type="MeshInstance" parent="Environment/StaticBody4"]
 transform = Transform( 1.02865, 0, 0, 0, 1.02865, 0, 0, 0, 1.02865, 0, 0, 0 )
@@ -45,6 +50,8 @@ shape = SubResource( 2 )
 
 [node name="StaticBody5" type="StaticBody" parent="Environment"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1.59779, 3.04054, 0, -39.7689 )
+collision_layer = 2
+collision_mask = 0
 
 [node name="MeshInstance" type="MeshInstance" parent="Environment/StaticBody5"]
 transform = Transform( 1.02865, 0, 0, 0, 1.02865, 0, 0, 0, 1.02865, 0, 0, 0 )
@@ -56,6 +63,8 @@ shape = SubResource( 2 )
 
 [node name="StaticBody6" type="StaticBody" parent="Environment"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1.59779, 3.04054, 0, -56.963 )
+collision_layer = 2
+collision_mask = 0
 
 [node name="MeshInstance" type="MeshInstance" parent="Environment/StaticBody6"]
 transform = Transform( 1.02865, 0, 0, 0, 1.02865, 0, 0, 0, 1.02865, 0, 0, 0 )
@@ -67,6 +76,8 @@ shape = SubResource( 2 )
 
 [node name="StaticBody7" type="StaticBody" parent="Environment"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1.59779, -0.874011, 0, -31.8445 )
+collision_layer = 2
+collision_mask = 0
 
 [node name="MeshInstance" type="MeshInstance" parent="Environment/StaticBody7"]
 transform = Transform( 1.02865, 0, 0, 0, 1.02865, 0, 0, 0, 1.02865, 0, 0, 0 )
@@ -77,10 +88,16 @@ material/0 = null
 shape = SubResource( 2 )
 
 [node name="Car" type="KinematicBody" parent="."]
+collision_layer = 4
+collision_mask = 26
 script = ExtResource( 1 )
 
 [node name="Camera" type="Camera" parent="Car"]
-transform = Transform( 1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0.000400424, 3.0026, 7.00213 )
+transform = Transform( 1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, -0.845, 6.597, 8.433 )
+
+[node name="CameraBackwards" type="Camera" parent="Car"]
+transform = Transform( -1, 8.43339e-08, -3.14739e-07, 0, 0.965926, 0.258819, 3.25841e-07, 0.258819, -0.965926, -0.845, 6.597, -8.433 )
+current = true
 
 [node name="CollisionShape" type="CollisionShape" parent="Car"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, 0 )
@@ -89,9 +106,10 @@ shape = SubResource( 5 )
 [node name="Carv1" parent="Car" instance=ExtResource( 4 )]
 transform = Transform( -1, 0, -8.74228e-08, -2.29761e-09, 0.999655, 0.0262816, 8.73926e-08, 0.0262816, -0.999655, 0, 0, 0.083 )
 
-[node name="Spatial" type="Spatial" parent="."]
+[node name="TestRoad" type="Spatial" parent="."]
+visible = false
 
-[node name="MeshInstance" type="MeshInstance" parent="Spatial"]
+[node name="MeshInstance" type="MeshInstance" parent="TestRoad"]
 transform = Transform( 10, 0, 0, 0, -1.62921e-05, 1, 0, -100, -1.62921e-07, -0.060955, -1.00026, -40.0607 )
 mesh = SubResource( 4 )
 material/0 = null
@@ -100,16 +118,43 @@ material/0 = null
 script = ExtResource( 2 )
 
 [node name="LeftBorder" type="StaticBody" parent="Borders"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 3, 5, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 3, 7, 0, 0 )
+collision_layer = 16
+collision_mask = 4
 
 [node name="CollisionShape" type="CollisionShape" parent="Borders/LeftBorder"]
 shape = SubResource( 2 )
 
 [node name="RightBorder" type="StaticBody" parent="Borders"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 3, -5, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 3, -6.99907, -5.34058e-05, 0.0665164 )
+collision_layer = 16
+collision_mask = 4
 
 [node name="CollisionShape" type="CollisionShape" parent="Borders/RightBorder"]
 shape = SubResource( 2 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource( 3 )
+
+[node name="Roads" type="Spatial" parent="."]
+
+[node name="Road" parent="Roads" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, 0 )
+
+[node name="Road2" parent="Roads" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, -10 )
+
+[node name="Road3" parent="Roads" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, -20 )
+
+[node name="Road4" parent="Roads" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, -30 )
+
+[node name="Road5" parent="Roads" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, -40 )
+
+[node name="Road6" parent="Roads" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, -50 )
+
+[node name="Road7" parent="Roads" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, -60 )

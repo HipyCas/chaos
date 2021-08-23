@@ -10,6 +10,12 @@ onready var cameraDefault = $Camera.rotation_degrees
 var velocity = Vector3.ZERO
 var input_vector = Vector3()
 
+onready var luggageScene = load("res://Luggage.tscn")
+const MAX_LUGGAGE_ROTATION = 200
+
+func _start():
+	randomize() # Initialize random seed
+
 func _process(delta):
 	$Camera.rotation_degrees.y = cameraDefault.y - velocity.x / 2
 	$Camera.fov = defaultFov - velocity.z
@@ -27,6 +33,13 @@ func _physics_process(delta):
 		input_vector.x -= 1 
 	if Input.is_action_pressed("ui_right"):
 		input_vector.x += 1 
+	
+#	if Input.is_key_pressed(KEY_L):
+	if Input.is_action_just_pressed("luggage_drop"):
+		var luggage = luggageScene.instance()
+		luggage.add_torque(Vector3(randi() % MAX_LUGGAGE_ROTATION, randi() % MAX_LUGGAGE_ROTATION, randi() % MAX_LUGGAGE_ROTATION))
+		luggage.global_transform = global_transform
+		get_node("..").add_child(luggage)
 	
 	velocity += input_vector * acceleration
 	velocity *= friction
