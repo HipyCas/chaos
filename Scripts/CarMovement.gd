@@ -10,7 +10,7 @@ onready var cameraDefault = $Camera.rotation_degrees
 var velocity = Vector3.ZERO
 var input_vector = Vector3()
 
-onready var luggageScene = load("res://Luggage.tscn")
+onready var luggageScene = preload("res://Luggage.tscn")
 const MAX_LUGGAGE_ROTATION = 200
 
 func _start():
@@ -38,6 +38,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("luggage_drop"):
 		var luggage = luggageScene.instance()
 		luggage.add_torque(Vector3(randi() % MAX_LUGGAGE_ROTATION, randi() % MAX_LUGGAGE_ROTATION, randi() % MAX_LUGGAGE_ROTATION))
+		luggage.add_central_force(Vector3.FORWARD * 450)
 		luggage.global_transform = global_transform
 		get_node("..").add_child(luggage)
 	

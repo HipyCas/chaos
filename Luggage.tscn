@@ -1,23 +1,41 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
-[sub_resource type="SpatialMaterial" id=3]
+[ext_resource path="res://Scripts/Luggage.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Baggage2.glb" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Baggage1.glb" type="PackedScene" id=3]
+
+[sub_resource type="PhysicsMaterial" id=1]
+friction = 0.5
+rough = true
+bounce = 1.0
+
+[sub_resource type="SpatialMaterial" id=2]
 albedo_color = Color( 0.305882, 0.121569, 0.121569, 1 )
 roughness = 0.77
 
-[sub_resource type="CubeMesh" id=1]
-material = SubResource( 3 )
+[sub_resource type="CubeMesh" id=3]
+material = SubResource( 2 )
 size = Vector3( 1, 0.25, 0.75 )
 
-[sub_resource type="BoxShape" id=2]
+[sub_resource type="BoxShape" id=4]
 extents = Vector3( 0.5, 0.125, 0.375 )
 
 [node name="Luggage" type="RigidBody"]
 collision_layer = 8
 collision_mask = 15
+physics_material_override = SubResource( 1 )
+script = ExtResource( 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
-mesh = SubResource( 1 )
+visible = false
+mesh = SubResource( 3 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-shape = SubResource( 2 )
+shape = SubResource( 4 )
+
+[node name="Baggage1" parent="." instance=ExtResource( 3 )]
+transform = Transform( 0.3, 0, 0, 0, -1.31134e-08, -0.3, 0, 0.3, -1.31134e-08, 0, 0, 0 )
+
+[node name="Baggage2" parent="." instance=ExtResource( 2 )]
+transform = Transform( -1.31134e-08, -0.3, -1.31134e-08, 0, -1.31134e-08, 0.3, -0.3, 1.31134e-08, 5.73206e-16, 0.259483, 0.2, -1 )
