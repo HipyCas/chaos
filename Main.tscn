@@ -1,10 +1,13 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scripts/CarMovement.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/FollowCar.gd" type="Script" id=2]
 [ext_resource path="res://default_env.tres" type="Environment" id=3]
 [ext_resource path="res://Assets/Carv1.glb" type="PackedScene" id=4]
 [ext_resource path="res://Road.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scripts/RoadGenerator.gd" type="Script" id=6]
+[ext_resource path="res://Scripts/FreeRoad.gd" type="Script" id=7]
+[ext_resource path="res://Scripts/CarGenerator.gd" type="Script" id=8]
 
 [sub_resource type="CubeMesh" id=1]
 
@@ -137,24 +140,38 @@ shape = SubResource( 2 )
 environment = ExtResource( 3 )
 
 [node name="Roads" type="Spatial" parent="."]
+script = ExtResource( 6 )
 
 [node name="Road" parent="Roads" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, 0 )
+script = ExtResource( 7 )
 
 [node name="Road2" parent="Roads" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, -10 )
+script = ExtResource( 7 )
 
 [node name="Road3" parent="Roads" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, -20 )
+script = ExtResource( 7 )
 
 [node name="Road4" parent="Roads" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, -30 )
+script = ExtResource( 7 )
 
 [node name="Road5" parent="Roads" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, -40 )
+script = ExtResource( 7 )
 
 [node name="Road6" parent="Roads" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, -50 )
+script = ExtResource( 7 )
 
 [node name="Road7" parent="Roads" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, -60 )
+script = ExtResource( 7 )
+
+[node name="CarGenerator" type="Spatial" parent="."]
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, -60 )
+script = ExtResource( 8 )
+
+[node name="TrafficCars" type="Node" parent="."]
